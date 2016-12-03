@@ -1,30 +1,40 @@
-# React Date Picker
-[![npm version](https://badge.fury.io/js/react-datepicker.svg)](https://badge.fury.io/js/react-datepicker)
-[![Build Status](https://travis-ci.org/Hacker0x01/react-datepicker.svg?branch=master)](https://travis-ci.org/Hacker0x01/react-datepicker)
-[![Dependency Status](https://david-dm.org/Hacker0x01/react-datepicker.svg)](https://david-dm.org/Hacker0x01/react-datepicker)
-[![codecov.io](https://codecov.io/github/Hacker0x01/react-datepicker/coverage.svg?branch=master)](https://codecov.io/github/Hacker0x01/react-datepicker?branch=master)
-[![Downloads](http://img.shields.io/npm/dm/react-datepicker.svg)](https://npmjs.org/package/react-datepicker)
+# React Hijri Datepicker:
 
-A simple and reusable Datepicker component for React ([Demo](https://hacker0x01.github.io/react-datepicker/))
+[![Join the chat at https://gitter.im/react-hijri/Lobby](https://badges.gitter.im/react-hijri/Lobby.svg)](https://gitter.im/react-hijri/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-![](https://cloud.githubusercontent.com/assets/1412392/5339491/c40de124-7ee1-11e4-9f07-9276e2545f27.png)
+
+أوّل  مكوّن رياكت في العالم للتاريخ الهجري
+
+[![Join the chat at https://gitter.im/abdennour/react-datepicker](https://badges.gitter.im/abdennour/react-datepicker.svg)](https://gitter.im/abdennour/react-datepicker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![npm version](https://badge.fury.io/js/react-hijri.svg)](https://badge.fury.io/js/react-hijri)
+[![Build Status](https://travis-ci.org/abdennour/react-datepicker.svg?branch=master)](https://travis-ci.org/abdennour/react-datepicker)
+[![Dependency Status](https://david-dm.org/abdennour/react-datepicker.svg)](https://david-dm.org/abdennour/react-datepicker)
+[![codecov](https://codecov.io/gh/abdennour/react-datepicker/branch/master/graph/badge.svg)](https://codecov.io/gh/abdennour/react-datepicker)
+[![Downloads](http://img.shields.io/npm/dm/react-hijri.svg)](https://npmjs.org/package/react-hijri)
+
+
+A simple and reusable Datepicker component for React .
+It is a fork from [@react-datepicker repo](https://github.com/Hacker0x01/react-datepicker) however, we add calendars managements including `Hijri` calendar.
+
 
 ## Installation
 
 The package can be installed via NPM:
 
 ```
-npm install react-datepicker --save
+npm install react-hijri --save
 ```
 
-You’ll need to install React and Moment.js separately since those dependencies aren’t included in the package. Below is a simple example on how to use the Datepicker in a React view. You will also need to require the css file from this package (or provide your own). The example below shows how to include the css from this package if your build system supports requiring css files (webpack is one that does).
+You’ll need to install `React` and `Moment-Hijri` separately since those dependencies aren’t included in the package. Below is a simple example on how to use the Datepicker in a React view. You will also need to require the css file from this package (or provide your own). The example below shows how to include the css from this package if your build system supports requiring css files (webpack is one that does).
 
 ```js
 var React = require('react');
-var DatePicker = require('react-datepicker');
-var moment = require('moment');
+var DatePicker = require('react-hijri');
+var moment = require('moment-hijri');
 
-require('react-datepicker/dist/react-datepicker.css');
+moment.locale(`ar`);
+
+require('react-hijri/dist/react-datepicker.css');
 
 var Example = React.createClass({
   displayName: 'Example',
@@ -44,7 +54,11 @@ var Example = React.createClass({
   render: function() {
     return <DatePicker
         selected={this.state.startDate}
-        onChange={this.handleChange} />;
+        onChange={this.handleChange}
+        calendar="hijri"
+        dateFormat="YYYY/MM/DD"
+        dateFormatCalendar="MMMM YYYY"  
+         />;
   }
 });
 ```
@@ -57,7 +71,7 @@ The most basic use of the DatePicker can be described with:
 <DatePicker selected={this.state.date} onChange={this.handleChange} />
 ```
 
-See [here](https://github.com/Hacker0x01/react-datepicker/blob/master/docs/datepicker.md) for a full list of props that may be passed to the component. Examples are given on the [main website](https://hacker0x01.github.io/react-datepicker).
+See [here](https://github.com/abdennour/react-datepicker/blob/master/docs/datepicker.md) for a full list of props that may be passed to the component. Examples are given on the [main website](https://abdennour.github.io/react-datepicker).
 
 ### Localization
 
@@ -89,11 +103,27 @@ Unfortunately it is difficult to support legacy browsers while maintaining our a
 
 ## Local Development
 
-The `master` branch contains the latest version of the Datepicker component. To start your example app, you can run `npm start`. This starts a simple webserver on http://localhost:8080. The server will automatically compile your changes, run tests and execute linters. To help you develop the component we’ve set up some tests that covers the basic functionality (can be found in  `/tests`). Even though we’re big fans of testing, this only covers a small piece of the component. We highly recommend you add tests when you’re adding new functionality.
+The `master` branch contains the latest version of the Datepicker component. To start your example app, you can run `npm start`. This starts a simple webserver on http://localhost:8080.
+
+You can run `npm test` to execute the test suite and linters. To help you develop the component we’ve set up some tests that covers the basic functionality (can be found in  `/tests`). Even though we’re big fans of testing, this only covers a small piece of the component. We highly recommend you add tests when you’re adding new functionality.
 
 ### The examples
 The examples are hosted within the docs folder and are ran in the simple add that loads the Datepicker. To extend the examples with a new example, you can simply duplicate one of the existing examples and change the unique properties of your example.
 
+## Accessibility
+
+### Keyboard support
+
+* *Left*: Move to the previous day.
+* *Right*: Move to the next day.
+* *Up*: Move to the previous week.
+* *Down*: Move to the next week.
+* *PgUp*: Move to the previous month.
+* *PgDn*: Move to the next month.
+* *Home*: Move to the previous year.
+* *End*: Move to the next year.
+* *Enter/Esc/Tab*: close the calendar. (Enter & Esc calls preventDefautl)
+
 ## License
 
-Copyright (c) 2016 HackerOne Inc. and individual contributors. Licensed under MIT license, see [LICENSE](LICENSE) for the full license.
+MIT
